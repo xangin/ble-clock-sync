@@ -1,7 +1,9 @@
 # CGD1 clock-only setup and hardware validation
 
-CGD1 support was added in v0.2.0. Its handler has mocked
-protocol/HA tests; this integration has NOT yet been verified with a physical CGD1.
+CGD1 support was added in v0.2.0. The user reported successful clock synchronization
+with a physical CGD1 on 2026-10-01, ahead of v1.0.0. Exact firmware, connection path
+and the complete regression checklist were not supplied. The handler also has mocked
+protocol/HA tests.
 The upstream author reports tests against firmware 1.0.1_0130; that is upstream
 evidence, not a validation claim for this new handler.
 

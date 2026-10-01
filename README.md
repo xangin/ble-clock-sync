@@ -2,7 +2,7 @@
 
 <img src="ble_clock_sync.png" alt="BLE Clock Sync" width="160">
 
-Home Assistant BLE clock synchronization · Home Assistant 藍牙時鐘校時
+v1.0.0 · Home Assistant BLE clock synchronization · Home Assistant 藍牙時鐘校時
 
 [繁體中文](#繁體中文) · [English](#english)
 
@@ -19,10 +19,10 @@ Home Assistant BLE clock synchronization · Home Assistant 藍牙時鐘校時
 | LYWSD02 / LYWSD02MMC | 原廠，使用五位元組時間格式 | 協定模擬測試通過，待實機驗證 |
 | MHO-C303 | 原廠，符合小米服務與五位元組時間格式 | 協定模擬測試通過，待實機驗證 |
 | 其他具備時鐘功能的 PVVX 裝置 | 提供 1F10/1F1F 與 0x23 指令 | 協定模擬測試通過，需依型號驗證 |
-| 青萍 CGD1 | 原廠 | 已實作 token 驗證與校時，待實機驗證 |
+| 青萍 CGD1 | 原廠 | 已有使用者實機校時成功回報 |
 
 MJWSD05MMC 原廠韌體、PIN 保護的 PVVX GATT 目前不支援。
-MJWSD05MMC PVVX 的實機成功回報日期為 2026-10-01；未提供確切韌體版本、
+MJWSD05MMC PVVX 與 CGD1 的實機成功回報日期為 2026-10-01；未提供確切韌體版本、
 連線路徑及完整回歸結果。模擬測試通過不代表所有韌體版本均已實機驗證。
 
 ### 安裝
@@ -75,7 +75,7 @@ CGD1 時區精度為六分鐘：UTC+8、UTC-5、UTC+5:30 可精確表示，UTC+5
 
 ### 升級與疑難排解
 
-從 v0.1.0 升級至 v0.2.0 後重新啟動 HA，原裝置及排程會保留。
+從舊版升級至 v1.0.0 後重新啟動 HA，原裝置及排程會保留。
 已移除 `clock_drift`，舊實體會自動清除；校時按鈕使用 `mdi:clock-sync` 圖示。
 
 需要紀錄時，在整合選單啟用偵錯記錄、重現一次校時，再停用並下載記錄。
@@ -96,10 +96,10 @@ Install through HACS; no `configuration.yaml` changes are required.
 | LYWSD02 / LYWSD02MMC | Stock with readable five-byte time | Mock protocol tests passed; hardware validation pending |
 | MHO-C303 | Stock with matching Xiaomi service and five-byte time | Mock protocol tests passed; hardware validation pending |
 | Other clock-capable PVVX devices | 1F10/1F1F service and command 0x23 | Mock protocol tests passed; validate each model |
-| Qingping CGD1 | Stock | Token authentication and clock sync implemented; hardware validation pending |
+| Qingping CGD1 | Stock | User-reported real-hardware sync success |
 
 MJWSD05MMC stock firmware and PIN-protected PVVX GATT are currently unsupported.
-The MJWSD05MMC PVVX success report dates to 2026-10-01; exact firmware, connection
+The MJWSD05MMC PVVX and CGD1 success reports date to 2026-10-01; exact firmware, connection
 path and full regression results were not supplied. Mock tests do not establish
 hardware compatibility across all firmware variants.
 
@@ -158,7 +158,7 @@ See the [CGD1 setup and validation guide](docs/CGD1_SETUP.md).
 
 ### Upgrades and troubleshooting
 
-Restart HA after upgrading from v0.1.0 to v0.2.0. Existing entries and schedules remain.
+Restart HA after upgrading to v1.0.0. Existing entries and schedules remain.
 The obsolete `clock_drift` entity is removed automatically. The sync button uses `mdi:clock-sync`.
 
 Enable debug logging from the integration menu, reproduce one sync, then disable logging

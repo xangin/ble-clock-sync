@@ -12,7 +12,7 @@ success on this date; firmware version, transport and full regression results we
 | MJWSD05MMC | Stock | Xiaomi Stock candidate | EBE0CCB0… | EBE0CCB7… | Inspect length | Disabled for unverified format | Reported 6 bytes; semantics unconfirmed | Irrelevant to clock | May require authentication | Not implemented for 6 bytes | Planned / unsupported |
 | MJWSD05MMC | PVVX / BTHome | PVVX | 1F10 | 1F1F | Yes | Yes | GET `23`; SET `23` + uint32 LE; response 5 or 9 bytes | Encrypted BTHome is independent | Open GATT supported; PIN detected, not authenticated | SET response + fresh GET, <=10 s | User-reported hardware sync success (2026-10-01); full checklist pending |
 | Other clock-capable PVVX devices | PVVX | PVVX | 1F10 | 1F1F | Yes when command supported | Yes when command supported | Same command | Independent | Same policy | Response + GET | Protocol tested only; model not inferred from protocol |
-| CGD1 | Stock | Qingping CGD1 | 22210000… | 0001/0002/000b/000c | No verified time GET | Yes | 05 09 + UTC uint32 LE | Separate from clock | 16-byte pairing token | Matching command ACK + timezone read-back | Protocol tested only; hardware pending |
+| CGD1 | Stock | Qingping CGD1 | 22210000… | 0001/0002/000b/000c | No verified time GET | Yes | 05 09 + UTC uint32 LE | Separate from clock | 16-byte pairing token | Matching command ACK + timezone read-back | User-reported hardware sync success (2026-10-01); full checklist pending |
 
 Full Xiaomi UUID suffix: `-7a0a-4b0c-8a1a-6ff2997da3a6`.
 Full PVVX UUID: `00001f10-0000-1000-8000-00805f9b34fb` and
