@@ -1,0 +1,182 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "bluetooth_confirm": {
+        "description": "Set up clock sync for {name}? The selected device will be probed and synchronized, then daily at 04:00. Device compatibility has protocol tests only; real hardware validation is pending."
+      },
+      "user": {
+        "description": "Choose a clock. If no candidate is listed, enter the address of a device already seen by Home Assistant Bluetooth. A connectable adapter or active Bluetooth Proxy is required.",
+        "data": {
+          "address": "Clock"
+        }
+      },
+      "cgd1_auth": {
+        "title": "CGD1 pairing",
+        "description": "For an already paired clock, enter its existing CGD1 token. For an unpaired/reset clock, leave blank to generate and save a new token. Confirmation attempts binding and sync. This is not a sensor bindkey. Unpair from Qingping+ yourself if needed.",
+        "data": {
+          "auth_token": "CGD1 pairing token (optional)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "This clock is already set up.",
+      "already_in_progress": "This clock is already being set up.",
+      "no_devices_found": "No clock found by Home Assistant Bluetooth.",
+      "not_supported": "This advertisement is not a known clock candidate."
+    },
+    "error": {
+      "not_known": "Home Assistant has not seen this address. Check Bluetooth or your proxy and the device connect button.",
+      "invalid_token": "Enter a 32-character hexadecimal CGD1 pairing token, or leave blank to generate one."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Automatic sync",
+        "description": "Choose a schedule and hardware model. Model is metadata; GATT identifies the firmware protocol. Timezone/DST changes request correction within one minute when the clock is reachable. Manual sync is always available.",
+        "data": {
+          "schedule": "Frequency",
+          "model": "Hardware model",
+          "change_auth_token": "Change CGD1 pairing token (credential-only update)"
+        }
+      },
+      "daily": {
+        "title": "Every day",
+        "data": {
+          "time": "Time"
+        },
+        "data_description": {
+          "time": "A quiet moment, such as the night, works best."
+        }
+      },
+      "weekly": {
+        "title": "Every week",
+        "data": {
+          "weekday": "Day",
+          "time": "Time"
+        }
+      },
+      "cron": {
+        "title": "Custom schedule",
+        "description": "Five fields: minute hour day month weekday. Examples: `0 4 * * *` every day at 04:00, `30 3 * * 1` every Monday at 03:30, `0 */6 * * *` every 6 hours.",
+        "data": {
+          "cron": "Cron expression"
+        }
+      },
+      "cgd1_auth": {
+        "title": "Update CGD1 authentication",
+        "description": "Enter the existing CGD1 token, or leave blank to generate one only if the clock is unpaired. Saving reloads and retries sync, preserving the schedule. The integration never resets the clock.",
+        "data": {
+          "auth_token": "CGD1 pairing token (optional)"
+        }
+      }
+    },
+    "error": {
+      "invalid_cron": "This cron expression is not valid.",
+      "too_frequent": "Leave at least one hour between two syncs to save the battery.",
+      "invalid_token": "Enter a 32-character hexadecimal CGD1 pairing token, or leave blank to generate one."
+    }
+  },
+  "selector": {
+    "schedule": {
+      "options": {
+        "daily": "Every day (recommended)",
+        "weekly": "Every week",
+        "manual": "No scheduled sync",
+        "cron": "Custom (cron expression)"
+      }
+    },
+    "weekday": {
+      "options": {
+        "mon": "Monday",
+        "tue": "Tuesday",
+        "wed": "Wednesday",
+        "thu": "Thursday",
+        "fri": "Friday",
+        "sat": "Saturday",
+        "sun": "Sunday"
+      }
+    },
+    "model": {
+      "options": {
+        "unknown": "Unknown / other PVVX clock",
+        "LYWSD02": "LYWSD02",
+        "LYWSD02MMC": "LYWSD02MMC",
+        "MHO-C303": "MHO-C303",
+        "MJWSD05MMC": "MJWSD05MMC",
+        "CGD1": "CGD1"
+      }
+    }
+  },
+  "entity": {
+    "button": {
+      "sync_clock": {
+        "name": "Sync time"
+      }
+    },
+    "sensor": {
+      "last_sync": {
+        "name": "Last sync"
+      },
+      "next_sync": {
+        "name": "Next sync"
+      },
+      "sync_status": {
+        "name": "Sync status",
+        "state": {
+          "synced": "Synced",
+          "waiting": "Waiting for device",
+          "failed": "Failed",
+          "authentication_required": "Authentication required"
+        }
+      },
+      "clock_protocol": {
+        "name": "Clock protocol",
+        "state": {
+          "pvvx": "PVVX",
+          "xiaomi_stock": "Xiaomi stock",
+          "qingping_cgd1": "Qingping CGD1"
+        }
+      },
+      "firmware_family": {
+        "name": "Firmware family",
+        "state": {
+          "pvvx": "PVVX",
+          "xiaomi_stock": "Xiaomi stock",
+          "qingping_stock": "Qingping stock"
+        }
+      },
+      "last_sync_result": {
+        "name": "Last sync result",
+        "state": {
+          "never_synced": "Never synchronized",
+          "success": "Success",
+          "not_in_range": "Waiting for device",
+          "no_active_connection": "No active Bluetooth connection path",
+          "authentication_required": "Clock GATT requires authentication",
+          "unsupported_protocol": "Unsupported clock protocol or time format",
+          "sync_failed": "Sync or verification failed"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "not_in_range": {
+      "message": "Clock is out of range. Waiting for its next advertisement."
+    },
+    "no_active_connection": {
+      "message": "Bluetooth device detected, but no active Bluetooth connection path is available. Enable active connections on the proxy or put the device in connect mode."
+    },
+    "authentication_required": {
+      "message": "Clock GATT requires authentication. For CGD1, update the pairing token in Options, or unpair the clock yourself before generating a new token. PVVX PIN authentication remains unsupported. Sensor bindkeys are not GATT credentials."
+    },
+    "unsupported_protocol": {
+      "message": "The selected device has an unsupported clock protocol or time format. MJWSD05MMC stock firmware is outside v1 scope."
+    },
+    "sync_failed": {
+      "message": "Clock communication or read-back verification failed. A retry is scheduled with backoff."
+    }
+  },
+  "title": "BLE Clock Sync"
+}

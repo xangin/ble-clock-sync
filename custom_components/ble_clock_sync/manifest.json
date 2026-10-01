@@ -1,0 +1,70 @@
+{
+  "domain": "ble_clock_sync",
+  "name": "BLE Clock Sync",
+  "bluetooth": [
+    {
+      "local_name": "LYWSD02*",
+      "connectable": false
+    },
+    {
+      "local_name": "MHO-C303*",
+      "connectable": false
+    },
+    {
+      "local_name": "MJWSD05MMC*",
+      "connectable": false
+    },
+    {
+      "local_name": "ATC_*",
+      "connectable": false
+    },
+    {
+      "local_name": "BTH_*",
+      "connectable": false
+    },
+    {
+      "local_name": "PVVX_*",
+      "connectable": false
+    },
+    {
+      "service_uuid": "00001f10-0000-1000-8000-00805f9b34fb",
+      "connectable": false
+    },
+    {
+      "service_uuid": "ebe0ccb0-7a0a-4b0c-8a1a-6ff2997da3a6",
+      "connectable": false
+    },
+    {
+      "local_name": "CGD1*",
+      "connectable": false
+    },
+    {
+      "local_name": "Qingping CGD1*",
+      "connectable": false
+    },
+    {
+      "service_uuid": "22210000-554a-4546-5542-46534450464d",
+      "connectable": false
+    },
+    {
+      "service_data_uuid": "0000fdcd-0000-1000-8000-00805f9b34fb",
+      "connectable": false
+    }
+  ],
+  "codeowners": [
+    "@xangin"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "bluetooth"
+  ],
+  "documentation": "https://github.com/xangin/ble-clock-sync",
+  "integration_type": "device",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/xangin/ble-clock-sync/issues",
+  "requirements": [
+    "bleak-retry-connector==4.7.0",
+    "cronsim==2.7"
+  ],
+  "version": "0.2.0"
+}

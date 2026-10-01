@@ -1,0 +1,23 @@
+{
+  "entity": {
+    "button": {
+      "sync_clock": {
+        "default": "mdi:clock-sync"
+      }
+    },
+    "sensor": {
+      "clock_protocol": {
+        "default": "mdi:bluetooth"
+      },
+      "firmware_family": {
+        "default": "mdi:chip"
+      },
+      "sync_status": {
+        "default": "mdi:clock-check-outline"
+      },
+      "last_sync_result": {
+        "default": "mdi:clipboard-check-outline"
+      }
+    }
+  }
+}

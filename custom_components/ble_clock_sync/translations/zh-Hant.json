@@ -1,0 +1,182 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "bluetooth_confirm": {
+        "description": "要為 {name} 啟用校時嗎？確認後會辨識協定並立即校時，預設每日 04:00 同步。目前通過模擬協定測試，尚待實機驗證。"
+      },
+      "user": {
+        "description": "選擇時鐘；沒有候選裝置時，可輸入 Home Assistant 已接收過廣播的藍牙位址。需要本機藍牙或支援主動連線的 Bluetooth Proxy。",
+        "data": {
+          "address": "時鐘／藍牙位址"
+        }
+      },
+      "cgd1_auth": {
+        "title": "CGD1 配對驗證",
+        "description": "若已配對，請輸入原 CGD1 token。未配對或已解除配對時可留空，系統會產生並保存新 token；確認後會嘗試綁定並校時。此 token 不是感測器 bindkey。若綁定青萍 App，請先自行解除配對。",
+        "data": {
+          "auth_token": "CGD1 配對 token（選填）"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "此時鐘已設定。",
+      "already_in_progress": "此時鐘正在設定中。",
+      "no_devices_found": "Home Assistant 藍牙尚未發現時鐘。",
+      "not_supported": "此廣播不符合已知時鐘候選條件。"
+    },
+    "error": {
+      "not_known": "Home Assistant 尚未發現此位址。請檢查藍牙、Proxy 與裝置連線按鈕。",
+      "invalid_token": "請輸入 32 個十六進位字元的 CGD1 配對 token，或留空產生新 token。"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "自動校時",
+        "description": "選擇排程與硬體型號。韌體協定會透過 GATT 辨識。時區／夏令時間改變時，會於一分鐘內要求校時，裝置須可連線。",
+        "data": {
+          "schedule": "校時頻率",
+          "model": "硬體型號",
+          "change_auth_token": "更換 CGD1 配對 token（本次僅更新驗證設定）"
+        }
+      },
+      "daily": {
+        "title": "每日校時",
+        "data": {
+          "time": "時間"
+        },
+        "data_description": {
+          "time": "建議選擇夜間等較少使用藍牙的時間。"
+        }
+      },
+      "weekly": {
+        "title": "每週校時",
+        "data": {
+          "weekday": "星期",
+          "time": "時間"
+        }
+      },
+      "cron": {
+        "title": "自訂排程",
+        "description": "五個欄位：分 時 日 月 星期。例如 0 */6 * * * 表示每六小時；0 */12 * * * 表示每十二小時。",
+        "data": {
+          "cron": "Cron 表達式"
+        }
+      },
+      "cgd1_auth": {
+        "title": "更新 CGD1 驗證設定",
+        "description": "輸入現有 CGD1 token；只有裝置已解除配對時才留空產生新 token。儲存後會重載並重試校時，原排程保持不變。系統不會自動重設時鐘。",
+        "data": {
+          "auth_token": "CGD1 配對 token（選填）"
+        }
+      }
+    },
+    "error": {
+      "invalid_cron": "Cron 表達式無效。",
+      "too_frequent": "為節省電池，兩次自動校時間隔至少一小時。",
+      "invalid_token": "請輸入 32 個十六進位字元的 CGD1 配對 token，或留空產生新 token。"
+    }
+  },
+  "selector": {
+    "schedule": {
+      "options": {
+        "daily": "每日（建議）",
+        "weekly": "每週",
+        "manual": "僅手動",
+        "cron": "自訂 Cron"
+      }
+    },
+    "weekday": {
+      "options": {
+        "mon": "星期一",
+        "tue": "星期二",
+        "wed": "星期三",
+        "thu": "星期四",
+        "fri": "星期五",
+        "sat": "星期六",
+        "sun": "星期日"
+      }
+    },
+    "model": {
+      "options": {
+        "unknown": "未知／其他 PVVX 時鐘",
+        "LYWSD02": "LYWSD02",
+        "LYWSD02MMC": "LYWSD02MMC",
+        "MHO-C303": "MHO-C303",
+        "MJWSD05MMC": "MJWSD05MMC",
+        "CGD1": "CGD1"
+      }
+    }
+  },
+  "entity": {
+    "button": {
+      "sync_clock": {
+        "name": "立即校時"
+      }
+    },
+    "sensor": {
+      "last_sync": {
+        "name": "上次同步"
+      },
+      "next_sync": {
+        "name": "下次同步"
+      },
+      "sync_status": {
+        "name": "同步狀態",
+        "state": {
+          "synced": "同步成功",
+          "waiting": "等待裝置",
+          "failed": "同步失敗",
+          "authentication_required": "需要驗證"
+        }
+      },
+      "clock_protocol": {
+        "name": "時鐘協定",
+        "state": {
+          "pvvx": "PVVX",
+          "xiaomi_stock": "小米原廠",
+          "qingping_cgd1": "Qingping CGD1"
+        }
+      },
+      "firmware_family": {
+        "name": "韌體類型",
+        "state": {
+          "pvvx": "PVVX",
+          "xiaomi_stock": "小米原廠",
+          "qingping_stock": "青萍原廠"
+        }
+      },
+      "last_sync_result": {
+        "name": "上次同步結果",
+        "state": {
+          "never_synced": "尚未同步",
+          "success": "同步成功",
+          "not_in_range": "等待裝置",
+          "no_active_connection": "無可用的主動藍牙連線",
+          "authentication_required": "需要 GATT 驗證",
+          "unsupported_protocol": "不支援的協定或時間格式",
+          "sync_failed": "同步或讀回驗證失敗"
+        }
+      }
+    }
+  },
+  "exceptions": {
+    "not_in_range": {
+      "message": "時鐘不在範圍內，等待下次裝置廣播。"
+    },
+    "no_active_connection": {
+      "message": "已偵測到藍牙装置，但沒有可用的主動藍牙連線。請啟用 Proxy 的主動連線，或讓裝置進入可連線模式。"
+    },
+    "authentication_required": {
+      "message": "時鐘 GATT 需要驗證。CGD1 請在選項更換正確配對 token，或自行解除配對後產生新 token。PVVX PIN 驗證尚不支援。感測器 bindkey 不能替代 GATT 憑證。"
+    },
+    "unsupported_protocol": {
+      "message": "不支援此時鐘協定或時間格式。第一版不支援 MJWSD05MMC 原廠韌體。"
+    },
+    "sync_failed": {
+      "message": "時鐘通訊或讀回驗證失敗，將依退避排程重試。"
+    }
+  },
+  "title": "BLE 時鐘同步"
+}
