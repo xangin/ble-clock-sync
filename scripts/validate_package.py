@@ -56,7 +56,7 @@ def validate() -> None:
     )
     assert all(match["connectable"] is False for match in manifest["bluetooth"])
     hacs = json.loads((ROOT / "hacs.json").read_text())
-    assert hacs["render_readme"] is True and hacs["homeassistant"] == "2026.9.4"
+    assert hacs["render_readme"] is True and hacs["homeassistant"] == "2026.8.0"
     for name in [
         "__init__.py",
         "config_flow.py",
@@ -66,6 +66,7 @@ def validate() -> None:
         "diagnostics.py",
     ]:
         assert (COMPONENT / name).is_file()
+    assert (COMPONENT / "brand/icon.png").read_bytes() == (ROOT / "ble_clock_sync.png").read_bytes()
     en = json.loads((COMPONENT / "translations/en.json").read_text())
     zh = json.loads((COMPONENT / "translations/zh-Hant.json").read_text())
     assert en == json.loads((COMPONENT / "strings.json").read_text())

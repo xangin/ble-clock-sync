@@ -62,9 +62,6 @@
   "integration_type": "device",
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/xangin/ble-clock-sync/issues",
-  "requirements": [
-    "bleak-retry-connector==4.7.0",
-    "cronsim==2.7"
-  ],
+  "requirements": [],
   "version": "0.2.0"
 }

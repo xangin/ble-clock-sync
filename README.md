@@ -27,8 +27,8 @@ MJWSD05MMC PVVX 的實機成功回報日期為 2026-10-01；未提供確切韌�
 
 ### 安裝
 
-需求：**Home Assistant 2026.9.4 或更新版本**，以及可主動連線的藍牙介面。
-目前自動化測試使用 HA 2026.9.4；較舊版本未驗證。
+需求：**Home Assistant 2026.8.0 或更新版本**，以及可主動連線的藍牙介面。
+最低安裝版本設為 HA 2026.8.0；自動化測試使用 HA 2026.9.4。
 
 1. HACS → 自訂儲存庫，加入 `https://github.com/xangin/ble-clock-sync`，類別選「整合」。
 2. 下載 **BLE Clock Sync**，重新啟動 Home Assistant。
@@ -105,8 +105,8 @@ hardware compatibility across all firmware variants.
 
 ### Installation
 
-Requires **Home Assistant 2026.9.4 or later** and an active Bluetooth connection path.
-Automated tests currently target HA 2026.9.4; older releases are unverified.
+Requires **Home Assistant 2026.8.0 or later** and an active Bluetooth connection path.
+The minimum installation version is HA 2026.8.0; automated tests target HA 2026.9.4.
 
 1. HACS → Custom repositories → add `https://github.com/xangin/ble-clock-sync`, category **Integration**.
 2. Download **BLE Clock Sync** and restart Home Assistant.

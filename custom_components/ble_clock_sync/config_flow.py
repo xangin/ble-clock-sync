@@ -17,6 +17,7 @@ from homeassistant.config_entries import ConfigEntry, ConfigFlow, ConfigFlowResu
 from homeassistant.const import CONF_ADDRESS
 from homeassistant.core import callback
 from homeassistant.helpers.selector import (
+    SelectOptionDict,
     SelectSelector,
     SelectSelectorConfig,
     SelectSelectorMode,
@@ -221,7 +222,12 @@ class BLEClockOptionsFlow(OptionsFlow):
                             "model", self.config_entry.data.get("model", "unknown")
                         ),
                     ): SelectSelector(
-                        SelectSelectorConfig(options=MODELS, translation_key="model")
+                        SelectSelectorConfig(
+                            options=[
+                                SelectOptionDict(value=model, label=model) for model in MODELS
+                            ],
+                            translation_key="model",
+                        )
                     ),
                     vol.Required(CONF_SCHEDULE, default=current): SelectSelector(
                         SelectSelectorConfig(

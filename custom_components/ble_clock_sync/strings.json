@@ -100,12 +100,7 @@
     },
     "model": {
       "options": {
-        "unknown": "Unknown / other PVVX clock",
-        "LYWSD02": "LYWSD02",
-        "LYWSD02MMC": "LYWSD02MMC",
-        "MHO-C303": "MHO-C303",
-        "MJWSD05MMC": "MJWSD05MMC",
-        "CGD1": "CGD1"
+        "unknown": "Unknown / other PVVX clock"
       }
     }
   },
